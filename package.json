@@ -1,0 +1,19 @@
+{
+  "name": "invoice-manager-backend",
+  "version": "0.0.1",
+  "description": "Node.JS backend for the invoice manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KevinVanthuyne/invoice-manager-backend.git"
+  },
+  "author": "Kevin Vanthuyne",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KevinVanthuyne/invoice-manager-backend/issues"
+  },
+  "homepage": "https://github.com/KevinVanthuyne/invoice-manager-backend#readme"
+}
