@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/KevinVanthuyne/invoice-manager-backend/issues"
   },
-  "homepage": "https://github.com/KevinVanthuyne/invoice-manager-backend#readme"
+  "homepage": "https://github.com/KevinVanthuyne/invoice-manager-backend#readme",
+  "dependencies": {
+    "express": "4.17.1"
+  }
 }
