@@ -1,6 +1,12 @@
 var mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 
 var customerSchema = mongoose.Schema({
+  customerNumber: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   name: String,
   email: String,
   bankAccount: String,
@@ -16,6 +22,7 @@ var customerSchema = mongoose.Schema({
     default: Date.now,
   },
 });
+customerSchema.plugin(uniqueValidator);
 
 var Customer = (module.exports = mongoose.model('customer', customerSchema));
 module.exports.get = (callback, limit) => {

@@ -16,11 +16,7 @@ exports.list = (req, res) => {
 
 exports.create = (req, res) => {
   var customer = new Customer();
-  customer.name = req.body.name;
-  customer.email = req.body.email;
-  customer.bankAccount = req.body.bankAccount;
-  customer.address = req.body.address;
-  customer.phoneNumber = req.body.phoneNumber;
+  setCustomerAttributes(customer, req.body);
 
   customer.save(err => {
     if (err) JsonUtils.error(res, err);
@@ -50,11 +46,7 @@ exports.get = (req, res) => {
 exports.update = (req, res) => {
   Customer.findById(req.params.customerId, (err, customer) => {
     if (err) JsonUtils.error(res, err);
-    customer.name = req.body.name;
-    customer.email = req.body.email;
-    customer.bankAccount = req.body.bankAccount;
-    customer.address = req.body.address;
-    customer.phoneNumber = req.body.phoneNumber;
+    setCustomerAttributes(customer, req.body);
 
     customer.save(err => {
       if (err) JsonUtils.error(res, err);
@@ -84,4 +76,13 @@ exports.delete = (req, res) => {
       }
     }
   );
+};
+
+let setCustomerAttributes = (customer, body) => {
+  customer.customerNumber = body.customerNumber;
+  customer.name = body.name;
+  customer.email = body.email;
+  customer.bankAccount = body.bankAccount;
+  customer.address = body.address;
+  customer.phoneNumber = body.phoneNumber;
 };
