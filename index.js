@@ -1,4 +1,5 @@
 let express = require('express');
+var cors = require('cors');
 let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 
@@ -12,6 +13,11 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+
+const corsOptions = {
+  origin: 'http://localhost:4200',
+};
+app.use(cors(corsOptions));
 
 mongoose
   .connect('mongodb://localhost:27017/invoice-manager', {
