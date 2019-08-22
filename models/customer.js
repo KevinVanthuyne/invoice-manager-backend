@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 
-var customerSchema = mongoose.Schema({
+// separate schema without unique customerNumber for embedding in other schema's
+var sharedCustomerSchemaStructure = {
   customerNumber: {
     type: String,
     required: true,
-    unique: true,
   },
   name: String,
   email: String,
@@ -21,10 +21,22 @@ var customerSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-});
-customerSchema.plugin(uniqueValidator);
+};
+module.exports.schema = sharedCustomerSchemaStructure;
 
-var Customer = (module.exports = mongoose.model('customer', customerSchema));
-module.exports.get = (callback, limit) => {
+var customerSchemaStructure = {
+  customerNumber: {
+    unique: true,
+  },
+  ...sharedCustomerSchemaStructure,
+};
+var customerSchema = mongoose.Schema(customerSchemaStructure);
+customerSchema.plugin(uniqueValidator);
+var Customer = (module.exports.model = mongoose.model(
+  'customer',
+  customerSchema
+));
+
+module.exports.getAll = (callback, limit) => {
   Customer.find(callback).limit(limit);
 };

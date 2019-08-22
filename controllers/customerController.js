@@ -1,79 +1,75 @@
 Customer = require('../models/customer');
-JsonUtils = require('../jsonUtilities');
+Utils = require('../utilities');
 
-exports.list = (req, res) => {
-  Customer.get((err, customers) => {
-    if (err) JsonUtils.error(res, err);
-    else {
-      JsonUtils.success({
-        res,
-        message: 'Customer retrieved successfully',
-        data: customers,
-      });
-    }
-  });
-};
-
-exports.create = (req, res) => {
-  var customer = new Customer();
-  setCustomerAttributes(customer, req.body);
-
-  customer.save(err => {
-    if (err) JsonUtils.error(res, err);
-    else {
-      JsonUtils.success({
-        res,
-        message: 'New customer created',
-        data: customer,
-      });
-    }
-  });
-};
-
-exports.get = (req, res) => {
-  Customer.findById(req.params.customerId, (err, customer) => {
-    if (err) JsonUtils.error(res, err);
-    else {
-      JsonUtils.success({
-        res,
-        message: 'Retrieved customer',
-        data: customer,
-      });
-    }
-  });
-};
-
-exports.update = (req, res) => {
-  Customer.findById(req.params.customerId, (err, customer) => {
-    if (err) JsonUtils.error(res, err);
-    setCustomerAttributes(customer, req.body);
-
-    customer.save(err => {
-      if (err) JsonUtils.error(res, err);
-      else {
-        JsonUtils.success({
-          res,
-          message: 'Customer Info updated',
-          data: customer,
-        });
-      }
+exports.getAll = (req, res) => {
+  Customer.getAll((error, customers) => {
+    Utils.sendJsonResponse({
+      res,
+      error,
+      successMessage: 'Customers retrieved successfully',
+      data: customers,
     });
   });
 };
 
-exports.delete = (req, res) => {
-  Customer.remove(
-    {
-      _id: req.params.customerId,
-    },
-    (err, customer) => {
-      if (err) JsonUtils.error(res, err);
-      else {
-        JsonUtils.success({
+exports.create = (req, res) => {
+  var customer = new Customer.model();
+  setCustomerAttributes(customer, req.body);
+
+  customer.save(error => {
+    Utils.sendJsonResponse({
+      res,
+      error,
+      successMessage: 'New customer created',
+      data: customer,
+    });
+  });
+};
+
+exports.get = (req, res) => {
+  Customer.model.findOne(
+    { customerNumber: req.params.customerNumber },
+    (error, customer) => {
+      Utils.sendJsonResponse({
+        res,
+        error,
+        successMessage: 'Retrieved customer',
+        data: customer,
+      });
+    }
+  );
+};
+
+exports.update = (req, res) => {
+  Customer.model.findOne(
+    { customerNumber: req.params.customerNumber },
+    (error, customer) => {
+      if (error) Utils.sendJsonError({ res, error });
+      setCustomerAttributes(customer, req.body);
+
+      customer.save(error => {
+        Utils.sendJsonResponse({
           res,
-          message: 'Customer deleted',
+          error,
+          successMessage: 'Customer Info updated',
+          data: customer,
         });
-      }
+      });
+    }
+  );
+};
+
+exports.delete = (req, res) => {
+  Customer.model.remove(
+    {
+      customerNumber: req.params.customerNumber,
+    },
+    (error, customer) => {
+      Utils.sendJsonResponse({
+        res,
+        error,
+        successMessage: 'Customer deleted',
+      });
     }
   );
 };

@@ -3,7 +3,7 @@ var cors = require('cors');
 let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 
-let routes = require('./routes/customerRoutes');
+let routes = require('./routes');
 
 let app = express();
 
@@ -33,7 +33,6 @@ var db = mongoose.connection;
 if (!db) console.log('Error connecting db');
 else console.log('Db connected successfully');
 
-app.get('/', (req, res) => res.send('Invoice Manager Api'));
 app.use('/api', routes);
 
 var port = process.env.PORT || 3000;

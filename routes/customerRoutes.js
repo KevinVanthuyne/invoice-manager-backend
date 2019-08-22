@@ -3,11 +3,11 @@ let customerController = require('../controllers/customerController');
 
 router
   .route('/customers')
-  .get(customerController.list)
+  .get(customerController.getAll)
   .post(customerController.create);
 
 router
-  .route('/customers/:customerId')
+  .route('/customers/:customerNumber')
   .get(customerController.get)
   .put(customerController.update)
   .delete(customerController.delete);
