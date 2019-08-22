@@ -81,4 +81,5 @@ let setCustomerAttributes = (customer, body) => {
   customer.bankAccount = body.bankAccount;
   customer.address = body.address;
   customer.phoneNumber = body.phoneNumber;
+  customer.type = body.type;
 };
