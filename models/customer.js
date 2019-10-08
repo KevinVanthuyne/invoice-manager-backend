@@ -8,6 +8,8 @@ var sharedCustomerSchemaStructure = {
     required: true,
   },
   type: String,
+  businessName: String,
+  vatNumber: String,
   name: String,
   email: String,
   bankAccount: String,
