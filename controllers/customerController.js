@@ -82,4 +82,6 @@ let setCustomerAttributes = (customer, body) => {
   customer.address = body.address;
   customer.phoneNumber = body.phoneNumber;
   customer.type = body.type;
+  customer.businessName = body.businessName;
+  customer.vatNumber = body.vatNumber;
 };
