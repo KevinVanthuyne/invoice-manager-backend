@@ -40,3 +40,25 @@ exports.create = (req, res) => {
     });
   });
 };
+
+exports.getNextId = (req, res) => {
+  Expense.model
+    .findOne({})
+    .sort({ creationDate: 'desc' })
+    .exec((error, expense) => {
+      if (error) Utils.sendJsonError({ error, res });
+      else if (expense == null)
+        Utils.sendJsonSuccess({
+          res,
+          message: 'First expense id created',
+          data: { nextId: 1 },
+        });
+      else {
+        Utils.sendJsonSuccess({
+          res,
+          message: 'Next expense id found',
+          data: { nextId: Number(expense.id) + 1 },
+        });
+      }
+    });
+};
