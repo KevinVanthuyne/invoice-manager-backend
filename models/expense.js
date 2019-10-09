@@ -10,6 +10,10 @@ var expenseSchema = mongoose.Schema({
   description: String,
   unitPrice: Number,
   quantity: Number,
+  creationDate: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 expenseSchema.plugin(uniqueValidator);
