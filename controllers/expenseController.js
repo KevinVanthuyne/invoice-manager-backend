@@ -23,3 +23,20 @@ exports.get = (req, res) => {
     });
   });
 };
+
+exports.create = (req, res) => {
+  var expense = new Expense.model();
+  expense.id = req.body.id;
+  expense.description = req.body.description;
+  expense.unitPrice = req.body.unitPrice;
+  expense.quantity = req.body.quantity;
+
+  expense.save(error => {
+    Utils.sendJsonResponse({
+      res,
+      error,
+      successMessage: 'New expense created',
+      data: expense,
+    });
+  });
+};
