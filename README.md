@@ -1,7 +1,20 @@
-# invoice-manager-backend
-Node.JS backend for the [invoice manager](https://github.com/KevinVanthuyne/invoice-manager)
+# Invoice Manager Backend
 
-## Running the backend
-Make sure you have MongoDB installed locally. The backend will try to connect to it on the default port (`27017`).
+Node.JS and MongoDB backend for the [invoice manager](https://github.com/KevinVanthuyne/invoice-manager).
 
-Run `node` or `nodemon` in the project to start the backend. The api will be accessable on `http://localhost:3000/api`.
+## Local Setup
+
+- Download and install [MongoDB](https://www.mongodb.com/)'s Community Server.
+    - It's easiest to install it as a Windows Service.
+- Download and install [Node.js](https://nodejs.org).
+- Navigate to the root folder of the project in a terminal.
+    - Run `npm install`.
+    - Run `node index.js`. 
+
+The API should now be available on http://localhost:3000/api.
+
+### Notes
+
+The backend will try to connect to MongoDB on the default port (`27017`).
+
+For development it's easier to run `nodemon index.js` to automatically reload changes.
